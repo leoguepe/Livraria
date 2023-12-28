@@ -11,7 +11,12 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array<int, string>
      */
-    protected $except = [
-        //
-    ];
+    // protected $except = [
+    //     'autores',
+    // ];
+
+    public function handle($request, \Closure $next)
+    {
+        return $next($request);
+    }
 }
