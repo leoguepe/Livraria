@@ -1,19 +1,7 @@
 #!/bin/bash
 
-if [ "$environmentName" == "production" ] || [ "$environmentName" == "development" ]; then
-    echo true
-else
-    environmentName=$(curl -s http://169.254.169.254/latest/user-data | grep 'environment=' | cut -d '=' -f 2)
-    role=$(curl -s http://169.254.169.254/latest/user-data | grep 'role=' | cut -d '=' -f 2)
-fi
-
-if [ "$environmentName" == "production" ]; then
-    livrariaServerName='prova.leonardoguedes.com'
-    livrariaServerAlias='prova.leonardoguedes.com'
-else
-    livrariaServerName='prova-dev.leonardoguedes.com'
-    livrariaServerAlias='prova-dev.leonardoguedes.com'
-fi
+livrariaServerName='prova.leonardoguedes.com'
+livrariaServerAlias='prova.leonardoguedes.com'
 
 cat <<EOF > /etc/httpd/conf/livraria.conf
 <VirtualHost *:80>
