@@ -11,4 +11,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('livros', LivroController::class);
 Route::resource('autores', AutorController::class);
 Route::resource('assuntos', AssuntoController::class);
-Route::get('/relatorio-livros', [RelatorioController::class, 'gerarRelatorio'])->name('relatorio.livros');
+Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorios.index');
+Route::get('/relatorios/download', [RelatorioController::class, 'download'])->name('relatorios.download');
