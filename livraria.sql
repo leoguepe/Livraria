@@ -176,43 +176,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `relatorio_livros`;
 /*!50001 DROP VIEW IF EXISTS `relatorio_livros`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE VIEW `relatorio_livros` AS SELECT 
- 1 AS `Titulo`,
- 1 AS `Editora`,
- 1 AS `Edicao`,
- 1 AS `AnoPublicacao`,
- 1 AS `Valor`,
- 1 AS `Autores`,
- 1 AS `Assuntos`*/;
-SET character_set_client = @saved_cs_client;
-
---
--- Final view structure for view `relatorio_livros`
---
-
-/*!50001 DROP VIEW IF EXISTS `relatorio_livros`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `relatorio_livros` AS select `l`.`Titulo` AS `Titulo`,`l`.`Editora` AS `Editora`,`l`.`Edicao` AS `Edicao`,`l`.`AnoPublicacao` AS `AnoPublicacao`,`l`.`Valor` AS `Valor`,group_concat(distinct `a`.`Nome` separator ', ') AS `Autores`,group_concat(distinct `asu`.`Descricao` separator ', ') AS `Assuntos` from ((((`livro` `l` left join `livro_autor` `la` on((`l`.`Codl` = `la`.`Livro_Codl`))) left join `autor` `a` on((`la`.`Autor_CodAu` = `a`.`CodAu`))) left join `livro_assunto` `las` on((`l`.`Codl` = `las`.`Livro_Codl`))) left join `assunto` `asu` on((`las`.`Assunto_CodAs` = `asu`.`CodAs`))) group by `l`.`Codl` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-12-29 11:45:56
+CREATE VIEW relatorio_livros AS
+SELECT
+    l.Titulo,
+    l.Editora,
+    l.Edicao,
+    l.AnoPublicacao,
+    l.Valor,
+    GROUP_CONCAT(DISTINCT a.Nome SEPARATOR ', ') AS Autores,
+    GROUP_CONCAT(DISTINCT asu.Descricao SEPARATOR ', ') AS Assuntos
+FROM Livro l
+LEFT JOIN Livro_Autor la ON l.Codl = la.Livro_Codl
+LEFT JOIN Autor a ON la.Autor_CodAu = a.CodAu
+LEFT JOIN Livro_Assunto las ON l.Codl = las.Livro_Codl
+LEFT JOIN Assunto asu ON las.Assunto_CodAs = asu.CodAs
+GROUP BY l.Codl;

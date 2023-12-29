@@ -9,6 +9,7 @@ Este projeto consiste em um sistema de gerenciamento de livraria, incluindo cada
 
 - Docker
 - Docker Compose
+- MySQL
 
 ### Configuração
 
