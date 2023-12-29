@@ -43,7 +43,12 @@
         </div>
         <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
 
-        @if ($filtrosAplicados)
+        @if (
+            $filtrosAplicados['titulo'] ||
+                $filtrosAplicados['editora'] ||
+                $filtrosAplicados['autores'] ||
+                $filtrosAplicados['assuntos']
+        )
             <a href="{{ route('relatorios.download') }}" class="btn btn-secondary mt-3">Download PDF</a>
         @endif
     </form>

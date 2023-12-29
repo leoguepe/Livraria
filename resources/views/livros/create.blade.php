@@ -32,13 +32,19 @@
 
         <div class="form-group">
             <label for="anoPublicacao">Ano de Publicação:</label>
-            <input type="text" class="form-control" id="anoPublicacao" name="AnoPublicacao" required>
+            <select class="form-control" id="anoPublicacao" name="AnoPublicacao">
+                @php
+                    $anoAtual = date('Y');
+                @endphp
+                @for ($ano = $anoAtual; $ano >= 1900; $ano--)
+                    <option value="{{ $ano }}">{{ $ano }}</option>
+                @endfor
+            </select>
         </div>
-
 
         <div class="form-group">
             <label for="valor">Valor (R$):</label>
-            <input type="text" class="form-control" id="valor" name="Valor" required>
+            <input type="text" class="form-control" id="Valor" name="Valor" required>
         </div>
 
         <div class="form-group">
@@ -74,20 +80,3 @@
         <button type="submit" class="btn btn-success">Salvar</button>
     </form>
 @endsection
-
-<script>
-    document.getElementById('anoPublicacao').addEventListener('change', function(e) {
-        var year = e.target.value.split('-')[0];
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var valorInput = document.getElementById('valor');
-        if (valorInput) {
-            valorInput.addEventListener('input', function(e) {
-                var value = e.target.value;
-                e.target.value = value;
-            });
-        }
-    });
-</script>

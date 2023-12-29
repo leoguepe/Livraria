@@ -18,7 +18,7 @@ class LivroRequest extends FormRequest
             'Editora' => 'required|string|max:255',
             'Edicao' => 'required|integer',
             'AnoPublicacao' => 'required|string|size:4',
-            'Valor' => 'required|numeric',
+            'Valor' => 'required',
             'autores' => 'required|array',
             'autores.*' => 'exists:Autor,CodAu',
             'assuntos' => 'required|array',

@@ -34,13 +34,21 @@
 
         <div class="form-group">
             <label for="anoPublicacao">Ano de Publicação:</label>
-            <input type="text" class="form-control" id="anoPublicacao" name="AnoPublicacao"
-                value="{{ $livro->AnoPublicacao }}" required>
+            <select class="form-control" id="anoPublicacao" name="AnoPublicacao">
+                @php
+                    $anoAtual = date('Y');
+                @endphp
+                @for ($ano = $anoAtual; $ano >= 1900; $ano--)
+                    <option value="{{ $ano }}" {{ $ano == $livro->AnoPublicacao ? 'selected' : '' }}>
+                        {{ $ano }}
+                    </option>
+                @endfor
+            </select>
         </div>
 
         <div class="form-group">
             <label for="valor">Valor (R$):</label>
-            <input type="text" class="form-control" id="valor" name="Valor" value="{{ $livro->Valor }}" required>
+            <input type="text" class="form-control" id="Valor" name="Valor" value="{{ $livro->Valor }}" required>
         </div>
 
         <div class="form-group">

@@ -40,11 +40,8 @@ class LivroController extends Controller
     public function store(LivroRequest $request, LivroService $livroService)
     {
         try {
+
             $dadosLivro = $request->validated();
-
-            $anoPublicacao = substr($dadosLivro['AnoPublicacao'], 0, 4);
-            $dadosLivro['AnoPublicacao'] = $anoPublicacao;
-
             $autoresIds = $request->input('autores', []);
             $assuntosIds = $request->input('assuntos', []);
 

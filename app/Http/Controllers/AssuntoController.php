@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class AssuntoController extends Controller
 {
-    protected $livroService;
+    protected $assuntoService;
 
     public function __construct(LivroService $livroService)
     {
-        $this->livroService = $livroService;
+        $this->assuntoService = $livroService;
     }
 
     public function index(Request $request)
@@ -37,21 +37,15 @@ class AssuntoController extends Controller
 
 
 
-    public function store(LivroRequest $request)
+    public function store(AssuntoRequest $request, AssuntoService $assuntoService)
     {
         try {
-            // Aqui você pode passar os dados do livro, incluindo IDs de autores e assuntos
-            $this->livroService->addLivro($request->validated(), $request->autores, $request->assuntos);
-            return redirect()->route('livros.index')->with('success', 'Livro cadastrado com sucesso.');
+            $assuntoService->addAssunto($request->validated());
+            return redirect()->route('assuntos.index')->with('success', 'Assunto cadastrado com sucesso.');
         } catch (\Exception $e) {
-            Log::error('Error in Store Method for Livro', ['Error' => $e->getMessage()]);
-            return redirect()->route('livros.index')->with('error', 'Falha ao salvar o livro: ' . $e->getMessage());
+            Log::error('Error in Store Method', ['Error' => $e->getMessage()]);
+            return redirect()->route('assuntos.index')->with('error', 'Falha ao salvar o assunto.');
         }
-    }
-
-    public function show(Assunto $assunto)
-    {
-        return view('assuntos.show', compact('assunto'));
     }
 
     public function edit(Assunto $assunto)
@@ -72,6 +66,12 @@ class AssuntoController extends Controller
 
     public function destroy($id, AssuntoService $assuntoService)
     {
+        $assunto = Assunto::with('livros')->find($id);
+
+        if ($assunto && $assunto->livros->count() > 0) {
+            return redirect()->route('assuntos.index')->with('error', 'Não é possível excluir o assunto, pois está vinculado a livros.');
+        }
+
         try {
             $assuntoService->deleteAssunto($id);
             return redirect()->route('assuntos.index')->with('success', 'Assunto excluído com sucesso.');

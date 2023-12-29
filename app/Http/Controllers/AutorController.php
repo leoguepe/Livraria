@@ -45,11 +45,6 @@ class AutorController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $autor = $this->autorService->getAutorById($id);
-        return view('autores.show', compact('autor'));
-    }
 
     public function edit($id)
     {
@@ -70,6 +65,12 @@ class AutorController extends Controller
 
     public function destroy($id, AutorService $autorService)
     {
+        $autor = Autor::with('livros')->find($id);
+
+        if ($autor && $autor->livros->count() > 0) {
+            return redirect()->route('autores.index')->with('error', 'Não é possível excluir o autor, pois está vinculado a livros.');
+        }
+
         try {
             $autorService->deleteAutor($id);
             return redirect()->route('autores.index')->with('success', 'Autor excluído com sucesso.');
