@@ -1,10 +1,7 @@
-{{-- resources/views/livros/index.blade.php --}}
-
 @extends('layouts.app')
 
 @section('content')
-    <h1>Lista de Livros</h1><br>
-
+    <h1>Lista de Assuntos</h1><br>
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('success') }}
@@ -30,49 +27,37 @@
         </script>
     @endif
 
-    <a href="{{ route('livros.create') }}" class="btn btn-primary mb-3">Cadastrar Novo Livro</a>
+    <a href="{{ route('assuntos.create') }}" class="btn btn-primary mb-3">Cadastrar Novo Assunto</a>
 
-    <form action="{{ route('livros.index') }}" method="GET" class="mb-3">
+    <form action="{{ route('assuntos.index') }}" method="GET" class="mb-3">
         <div class="input-group">
-            <input type="text" class="form-control" name="search" placeholder="Pesquisar por título do livro"
+            <input type="text" class="form-control" name="search" placeholder="Pesquisar por assunto"
                 value="{{ request('search') }}" autocomplete="off">
             <button type="submit" class="btn btn-primary">Pesquisar</button>
         </div>
     </form>
-
     <table class="table">
         <thead>
             <tr>
-                <th>Título</th>
-                <th>Autores</th>
-                <th>Assuntos</th>
-                <th>Editora</th>
-                <th>Edição</th>
-                <th>Ano de Publicação</th>
-                <th>Valor</th>
+                <th>Código do Assunto</th>
+                <th>Descrição</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($livros as $livro)
+            @foreach ($assuntos as $assunto)
                 <tr>
-                    <td class="align-middle">{{ $livro->Titulo }}</td>
-                    <td class="align-middle">{{ $livro->autores->pluck('Nome')->join(', ') }}</td>
-                    <td class="align-middle">{{ $livro->assuntos->pluck('Descricao')->join(', ') }}</td>
-                    <td class="align-middle">{{ $livro->Editora }}</td>
-                    <td class="align-middle">{{ $livro->Edicao }}</td>
-                    <td class="align-middle">{{ $livro->AnoPublicacao }}</td>
-                    <td class="align-middle">R${{ $livro->Valor }}</td>
-
+                    <td class="align-middle">{{ $assunto->CodAs }}</td>
+                    <td class="align-middle">{{ $assunto->Descricao }}</td>
                     <td class="text-center align-middle">
-                        <a href="{{ route('livros.edit', $livro->Codl) }}" class="btn btn-primary">
+                        <a href="{{ route('assuntos.edit', $assunto->CodAs) }}" class="btn btn-primary">
                             Editar
                         </a>
                     </td>
                     <td class="text-center align-middle">
-                        <form action="{{ route('livros.destroy', $livro->Codl) }}" method="POST"
-                            onsubmit="return confirm('Tem certeza que deseja excluir este livro?');">
+                        <form action="{{ route('assuntos.destroy', $assunto->CodAs) }}" method="POST"
+                            onsubmit="return confirm('Tem certeza que deseja excluir este assunto?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Excluir</button>

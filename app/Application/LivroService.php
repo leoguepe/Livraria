@@ -19,26 +19,35 @@ class LivroService
         return $this->livroRepository->all();
     }
 
-    public function addLivro($dadosLivro)
+    public function addLivro($dadosLivro, $autoresIds, $assuntosIds)
     {
         $livro = new Livro($dadosLivro);
-        $this->livroRepository->save($livro);
+        $livro->save();
+        $livro->autores()->sync($autoresIds);
+        $livro->assuntos()->sync($assuntosIds);
     }
+
 
     public function getLivroById($id)
     {
         return $this->livroRepository->find($id);
     }
 
-    public function updateLivro($id, $dadosLivro)
+    public function updateLivro($id, $dadosLivro, $autoresIds, $assuntosIds)
     {
         $livro = $this->livroRepository->find($id);
         $livro->update($dadosLivro);
+        $livro->autores()->sync($autoresIds);
+        $livro->assuntos()->sync($assuntosIds);
     }
+
 
     public function deleteLivro($id)
     {
         $livro = $this->livroRepository->find($id);
+        if (!$livro) {
+            throw new \Exception("Livro não encontrado.");
+        }
         $livro->delete();
     }
 }

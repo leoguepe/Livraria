@@ -28,7 +28,7 @@ class AutorService
             $autor->save();
         } catch (\Exception $e) {
             Log::error('Error saving autor', ['Error' => $e->getMessage()]);
-            throw $e; // Relança a exceção para ser capturada no controlador
+            throw $e;
         }
     }
 

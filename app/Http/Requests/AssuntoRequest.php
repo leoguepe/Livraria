@@ -14,7 +14,7 @@ class AssuntoRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao' => 'required|string|max:255',
+            'Descricao' => 'required|string|max:20',
         ];
     }
 }

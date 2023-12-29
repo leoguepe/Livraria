@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Models\Livro;
 use App\Application\LivroService;
+use App\Domain\Models\Autor;
+use App\Domain\Models\Assunto;
 use App\Http\Requests\LivroRequest;
 use Illuminate\Http\Request;
 
@@ -15,22 +18,44 @@ class LivroController extends Controller
         $this->livroService = $livroService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $livros = $this->livroService->getAllLivros();
-        return view('livros.index', compact('livros'));
+        $search = $request->input('search');
+
+        $livros = Livro::with(['autores', 'assuntos'])
+            ->when($search, function ($query, $search) {
+                return $query->where('Titulo', 'like', '%' . $search . '%');
+            })->get();
+        return view('livros.index', compact('livros', 'search'));
     }
+
 
     public function create()
     {
-        return view('livros.create');
+        $autores = Autor::all();
+        $assuntos = Assunto::all();
+        return view('livros.create', compact('autores', 'assuntos'));
     }
 
-    public function store(LivroRequest $request)
+    public function store(LivroRequest $request, LivroService $livroService)
     {
-        $this->livroService->addLivro($request->validated());
-        return redirect()->route('livros.index');
+        try {
+            $dadosLivro = $request->validated();
+
+            $anoPublicacao = substr($dadosLivro['AnoPublicacao'], 0, 4);
+            $dadosLivro['AnoPublicacao'] = $anoPublicacao;
+
+            $autoresIds = $request->input('autores', []);
+            $assuntosIds = $request->input('assuntos', []);
+
+            $livroService->addLivro($dadosLivro, $autoresIds, $assuntosIds);
+
+            return redirect()->route('livros.index')->with('success', 'Livro cadastrado com sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->route('livros.index')->with('error', 'Falha ao salvar o livro: ' . $e->getMessage());
+        }
     }
+
 
     public function show($id)
     {
@@ -41,18 +66,34 @@ class LivroController extends Controller
     public function edit($id)
     {
         $livro = $this->livroService->getLivroById($id);
-        return view('livros.edit', compact('livro'));
+        $autores = Autor::all();
+        $assuntos = Assunto::all();
+        return view('livros.edit', compact('livro', 'autores', 'assuntos'));
     }
 
-    public function update(LivroRequest $request, $id)
+    public function update(LivroRequest $request, LivroService $livroService, $id)
     {
-        $this->livroService->updateLivro($id, $request->validated());
-        return redirect()->route('livros.index');
+        try {
+            $dadosLivro = $request->validated();
+            $autoresIds = $request->input('autores', []);
+            $assuntosIds = $request->input('assuntos', []);
+
+            $livroService->updateLivro($id, $dadosLivro, $autoresIds, $assuntosIds);
+
+            return redirect()->route('livros.index')->with('success', 'Livro atualizado com sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->route('livros.index')->with('error', 'Erro ao atualizar o livro: ' . $e->getMessage());
+        }
     }
 
-    public function destroy($id)
+
+    public function destroy($id, LivroService $livroService)
     {
-        $this->livroService->deleteLivro($id);
-        return redirect()->route('livros.index');
+        try {
+            $livroService->deleteLivro($id);
+            return redirect()->route('livros.index')->with('success', 'Livro excluído com sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->route('livros.index')->with('error', 'Erro ao excluir o livro: ' . $e->getMessage());
+        }
     }
 }

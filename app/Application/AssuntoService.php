@@ -4,6 +4,7 @@ namespace App\Application;
 
 use App\Domain\Repositories\AssuntoRepositoryInterface;
 use App\Domain\Models\Assunto;
+use Illuminate\Support\Facades\Log;
 
 class AssuntoService
 {
@@ -21,8 +22,13 @@ class AssuntoService
 
     public function addAssunto($dadosAssunto)
     {
-        $assunto = new Assunto($dadosAssunto);
-        $this->assuntoRepository->save($assunto);
+        try {
+            $assunto = new Assunto($dadosAssunto);
+            $assunto->save();
+        } catch (\Exception $e) {
+            Log::error('Error saving assunto', ['Error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
     public function getAssuntoById($id)

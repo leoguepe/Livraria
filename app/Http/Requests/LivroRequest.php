@@ -14,8 +14,15 @@ class LivroRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo' => 'required|string|max:255',
-            'autor' => 'required|string|max:255',
+            'Titulo' => 'required|string|max:255',
+            'Editora' => 'required|string|max:255',
+            'Edicao' => 'required|integer',
+            'AnoPublicacao' => 'required|string|size:4',
+            'Valor' => 'required|numeric',
+            'autores' => 'required|array',
+            'autores.*' => 'exists:Autor,CodAu',
+            'assuntos' => 'required|array',
+            'assuntos.*' => 'exists:Assunto,CodAs',
         ];
     }
 }

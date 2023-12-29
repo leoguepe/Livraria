@@ -27,7 +27,7 @@
         </script>
     @endif
 
-    <a href="{{ route('autores.create') }}" class="btn btn-success mb-3">Cadastrar Novo Autor</a>
+    <a href="{{ route('autores.create') }}" class="btn btn-primary mb-3">Cadastrar Novo Autor</a>
 
     <form action="{{ route('autores.index') }}" method="GET" class="mb-3">
         <div class="input-group">

@@ -11,6 +11,7 @@ class Livro extends Model
 
     protected $table = 'Livro';
     public $timestamps = false;
+    protected $primaryKey = 'Codl';
 
     protected $fillable = ['Titulo', 'Editora', 'Edicao', 'AnoPublicacao', 'Valor'];
 

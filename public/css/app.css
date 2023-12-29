@@ -142,3 +142,11 @@ button {
 button:hover {
     background-color: #d32f2f;
 }
+
+.scrollable-checkbox-list {
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}

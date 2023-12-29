@@ -25,9 +25,9 @@
 
     <div class="sidebar">
         <ul>
-            <li><a href="/caminho1">Autores</a></li>
-            <li><a href="/caminho2">Assuntos</a></li>
-            <li><a href="/caminho2">Livros</a></li>
+            <li><a href="/autores">Autores</a></li>
+            <li><a href="/assuntos">Assuntos</a></li>
+            <li><a href="/livros">Livros</a></li>
         </ul>
     </div>
 

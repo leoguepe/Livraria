@@ -21,4 +21,14 @@ class EloquentLivroRepository implements LivroRepositoryInterface
     {
         return Livro::find($id);
     }
+
+    public function update(Livro $livro, array $dados)
+    {
+        $livro->update($dados);
+    }
+
+    public function delete(Livro $livro)
+    {
+        $livro->delete();
+    }
 }
