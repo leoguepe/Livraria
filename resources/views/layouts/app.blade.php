@@ -28,6 +28,7 @@
             <li><a href="/autores">Autores</a></li>
             <li><a href="/assuntos">Assuntos</a></li>
             <li><a href="/livros">Livros</a></li>
+            <li><a href="/relatorio-livros">Relatórios</a></li>
         </ul>
     </div>
 
