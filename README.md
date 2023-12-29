@@ -1,74 +1,50 @@
 
-# Livraria
+# Projeto Livraria
 
-Este projeto é uma aplicação web para gerenciamento de uma livraria. Ela permite operações CRUD em livros, autores e assuntos. O projeto foi desenvolvido com Laravel e utiliza Docker para facilitar a configuração do ambiente de desenvolvimento.
+Este projeto consiste em um sistema de gerenciamento de livraria, incluindo cadastro de livros, autores e assuntos.
 
-## Requisitos
+## Instruções de Configuração e Execução
+
+### Pré-requisitos
 
 - Docker
 - Docker Compose
 
-## Configuração e Execução
+### Configuração
 
-### Clonando o Repositório
-
-Primeiro, clone o repositório do projeto:
-
-```bash
-git clone https://github.com/leoguepe/Livraria.git
-cd Livraria
-```
-
-### Iniciando o Ambiente de Desenvolvimento
-
-Para iniciar o ambiente de desenvolvimento com Docker, use o Laravel Sail, que já está configurado no projeto:
-
-1. Copie o arquivo `.env.example` para criar um `.env`:
-
+1. Clone o repositório do projeto:
    ```bash
-   cp .env.example .env
+   git clone https://github.com/leoguepe/Livraria
+   ```
+2. Entre no diretório do projeto:
+   ```bash
+   cd Livraria
+   ```
+3. Crie um arquivo `.env` a partir do arquivo `.env.sample` fornecido no repositório:
+   ```bash
+   cp .env.sample .env
    ```
 
-2. Inicie os containers do Docker:
+### Execução com Docker
 
+1. Construa os containers utilizando Docker Compose:
+   ```bash
+   docker-compose build
+   ```
+2. Inicie os containers:
    ```bash
    ./vendor/bin/sail up
    ```
-
-   Você pode usar a flag `-d` para rodar em segundo plano.
-
-### Configurando a Aplicação
-
-Com os containers em execução, agora você pode configurar a aplicação:
-
-1. Instale as dependências do PHP:
-
+3. Para desligar os containers, utilize:
    ```bash
-   ./vendor/bin/sail composer install
+   ./vendor/bin/sail down
    ```
 
-2. Gere a chave da aplicação:
+### Base de Dados
 
-   ```bash
-   ./vendor/bin/sail artisan key:generate
-   ```
-
-3. Execute as migrações do banco de dados:
-
-   ```bash
-   ./vendor/bin/sail artisan migrate
-   ```
-
-### Acessando a Aplicação
-
-A aplicação estará disponível em `http://localhost:8001`.
-
-### Parando o Ambiente de Desenvolvimento
-
-Para parar os containers do Docker:
-
-```bash
-./vendor/bin/sail down
-```
+- O script SQL para criação da base de dados e inserção de alguns dados iniciais está localizado na raiz do projeto com o nome `livraria.sql`.
 
 
+## Mais Informações
+
+- O arquivo `.env.sample` já contém as configurações necessárias para a conexão com o banco de dados no ambiente Docker.

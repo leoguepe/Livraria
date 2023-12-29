@@ -26,7 +26,7 @@ CREATE TABLE `Assunto` (
   `CodAs` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Descricao` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`CodAs`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `Assunto` (
 
 LOCK TABLES `Assunto` WRITE;
 /*!40000 ALTER TABLE `Assunto` DISABLE KEYS */;
-INSERT INTO `Assunto` VALUES (1,'Romance'),(3,'Drama');
+INSERT INTO `Assunto` VALUES (5,'Ficção Científica'),(6,'Romance'),(7,'Mistério'),(8,'Fantasia'),(9,'Não Ficção'),(10,'Horror'),(11,'Biografia');
 /*!40000 ALTER TABLE `Assunto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +50,7 @@ CREATE TABLE `Autor` (
   `CodAu` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nome` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`CodAu`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `Autor` (
 
 LOCK TABLES `Autor` WRITE;
 /*!40000 ALTER TABLE `Autor` DISABLE KEYS */;
-INSERT INTO `Autor` VALUES (3,'Glenda'),(4,'Nina'),(18,'Dimitri'),(19,'teste'),(20,'654fdsfsdf');
+INSERT INTO `Autor` VALUES (23,'Carlos Orsi'),(24,'Jim Anotsu'),(25,'Milton Hatoum'),(26,'Bia Corrêa do Lago'),(27,'Rubem Fonseca'),(28,'Henrique Lisboa'),(29,'Laurentino Gomes'),(30,'Jô Soares');
 /*!40000 ALTER TABLE `Autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `Livro` (
   `AnoPublicacao` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Valor` decimal(8,2) NOT NULL,
   PRIMARY KEY (`Codl`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `Livro` (
 
 LOCK TABLES `Livro` WRITE;
 /*!40000 ALTER TABLE `Livro` DISABLE KEYS */;
-INSERT INTO `Livro` VALUES (1,'O Pequeno Príncipe','Abril',2,'2023',100.00);
+INSERT INTO `Livro` VALUES (3,'A Máquina Diferencial','Draco',1,'2015',39.00),(4,'Dois Irmãos','Companhia das Letras',20,'2000',59.00),(5,'O Caso Morel','Companhia das Letras',1,'1973',89.00),(6,'1808','Planeta',5,'2007',119.00);
 /*!40000 ALTER TABLE `Livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `Livro_Assunto` (
 
 LOCK TABLES `Livro_Assunto` WRITE;
 /*!40000 ALTER TABLE `Livro_Assunto` DISABLE KEYS */;
-INSERT INTO `Livro_Assunto` VALUES (1,1),(1,3);
+INSERT INTO `Livro_Assunto` VALUES (3,5),(4,6),(5,7),(6,9);
 /*!40000 ALTER TABLE `Livro_Assunto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `Livro_Autor` (
 
 LOCK TABLES `Livro_Autor` WRITE;
 /*!40000 ALTER TABLE `Livro_Autor` DISABLE KEYS */;
-INSERT INTO `Livro_Autor` VALUES (1,3),(1,4);
+INSERT INTO `Livro_Autor` VALUES (3,23),(3,24),(4,25),(4,26),(5,27),(5,28),(6,29),(6,30);
 /*!40000 ALTER TABLE `Livro_Autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,6 +169,42 @@ LOCK TABLES `migrations` WRITE;
 INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_reset_tokens_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1),(5,'2023_12_28_011751_create__assunto_table',1),(6,'2023_12_28_011757_create__autor_table',1),(7,'2023_12_28_011801_create__livro_table',1),(8,'2023_12_28_011807_create__livro__assunto_table',1),(9,'2023_12_28_011821_create__livro__autor_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `relatorio_livros`
+--
+
+DROP TABLE IF EXISTS `relatorio_livros`;
+/*!50001 DROP VIEW IF EXISTS `relatorio_livros`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `relatorio_livros` AS SELECT 
+ 1 AS `Titulo`,
+ 1 AS `Editora`,
+ 1 AS `Edicao`,
+ 1 AS `AnoPublicacao`,
+ 1 AS `Valor`,
+ 1 AS `Autores`,
+ 1 AS `Assuntos`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `relatorio_livros`
+--
+
+/*!50001 DROP VIEW IF EXISTS `relatorio_livros`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `relatorio_livros` AS select `l`.`Titulo` AS `Titulo`,`l`.`Editora` AS `Editora`,`l`.`Edicao` AS `Edicao`,`l`.`AnoPublicacao` AS `AnoPublicacao`,`l`.`Valor` AS `Valor`,group_concat(distinct `a`.`Nome` separator ', ') AS `Autores`,group_concat(distinct `asu`.`Descricao` separator ', ') AS `Assuntos` from ((((`livro` `l` left join `livro_autor` `la` on((`l`.`Codl` = `la`.`Livro_Codl`))) left join `autor` `a` on((`la`.`Autor_CodAu` = `a`.`CodAu`))) left join `livro_assunto` `las` on((`l`.`Codl` = `las`.`Livro_Codl`))) left join `assunto` `asu` on((`las`.`Assunto_CodAs` = `asu`.`CodAs`))) group by `l`.`Codl` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -179,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-29  2:00:38
+-- Dump completed on 2023-12-29 11:45:56
