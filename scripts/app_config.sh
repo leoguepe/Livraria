@@ -1,6 +1,6 @@
 #!/bin/bash
 
-s3baseUrl='s3://livrariadeploy/livraria/'S
+s3baseUrl='s3://livrariadeploy/livraria/'
 
 rm -rf /var/www/html/livraria_old
 
