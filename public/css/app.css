@@ -1,0 +1,144 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    background-color: #353333;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    align-items: center;
+    display: flex;
+    height: 50px;
+}
+
+.sidebar {
+    background-color: #34495e;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    width: 200px;
+    bottom: 0;
+    z-index: 500;
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 0;
+    border-bottom: 1px solid #909da5;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li:last-child {
+    border-bottom: none;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #576f86;
+}
+
+.content {
+    margin-top: 50px;
+    margin-left: 200px;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 300px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.content h1 {
+    font-size: 25px;
+}
+
+.nav-logo img {
+    max-height: 30px;
+    width: auto;
+    float: left;
+}
+
+.nav-text {
+    float: left;
+    margin-left: 40px;
+    position: fixed;
+}
+
+.icon {
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #6e6b7f;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}

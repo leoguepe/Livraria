@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AutorRequest extends FormRequest
 {
@@ -14,14 +15,7 @@ class AutorRequest extends FormRequest
     public function rules()
     {
         return [
-            'Nome' => 'required|string|max:255|unique:Autor,Nome',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'Nome.unique' => 'Um autor com este nome já existe.',
+            'Nome' => 'required|string|max:40',
         ];
     }
 }

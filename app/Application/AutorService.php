@@ -32,7 +32,6 @@ class AutorService
         }
     }
 
-
     public function getAutorById($id)
     {
         return $this->autorRepository->find($id);

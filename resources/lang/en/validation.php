@@ -3,7 +3,8 @@
 return [
     'custom' => [
         'Nome' => [
-            'unique' => 'Um autor com este nome já existe.',
+            'max' => 'O nome do autor não pode ter mais de :max caracteres.',
+            'unique' => 'O nome do autor já está em uso.',
         ],
     ],
 ];

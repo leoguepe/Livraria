@@ -11,6 +11,7 @@ class Autor extends Model
 
     protected $table = 'Autor';
     public $timestamps = false;
+    protected $primaryKey = 'CodAu';
 
     protected $fillable = ['Nome'];
 
