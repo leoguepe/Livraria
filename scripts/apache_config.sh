@@ -7,8 +7,8 @@ cat <<EOF > /etc/httpd/conf/livraria.conf
 <VirtualHost *:80>
     ServerName $livrariaServerName
     ServerAlias $livrariaServerAlias
-    DocumentRoot "/var/www/html/Livraria/public"
-    <Directory "/var/www/html/Livraria/public/">
+    DocumentRoot "/var/www/html/livraria/public"
+    <Directory "/var/www/html/livraria/public/">
             AllowOverride All
             RewriteEngine On
             RewriteBase /
